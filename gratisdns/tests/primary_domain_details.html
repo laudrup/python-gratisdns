@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" href="https://web.gratisdns.dk/wp-content/uploads/2015/05/favicon.png" type="image/x-icon" /> 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+	<script src="/js/promise.min.js"></script>
+
+
+    <link rel="stylesheet" href="/css/dns.css">
+
+	<link href="/css/fontawesome/all.css" rel="stylesheet">
+
+    <title>GratisDNS Admin</title>
+  </head>
+  <body>
+
+<!--      <input type="hidden" id="csrfp_hidden_data_token" value="csrfp_token"> -->
+<!-- 	  <input type="hidden" id="csrfp_hidden_data_urls" value='["*:\/\/*\/*"]'> -->
+<!--   	  <script type="text/javascript" src="/js/csrfprotector.js"></script>  -->
+
+      <script src="/js/jquery-3.3.1.min.js"></script>
+
+  
+  <!-- https://github.com/devWaleed/JQuery-JSON-Form-Binding/tree/master/src -->
+  <script src="/js/jquery-json-form-binding.min.js"></script>
+   
+  
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+	<div class="container">
+		<a class="navbar-brand" href="/"><img src="/images/websitelogo.svg" height="34"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbar-menu">
+			<ul class="navbar-nav ml-auto">
+
+				<li class="nav-item">
+					<a href="?action=dns_primarydns" class="nav-link">DNS</a>
+				</li>
+
+		
+				
+							
+				<li class="nav-item">
+					<a href="?action=hosting" class="nav-link">Hosting</a>
+				</li>
+
+	
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bruger</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="?action=usersetup_user">Indstillinger</a>
+						<a class="dropdown-item" href="?action=logmeout">Log ud</a>
+											</div>
+				</li>
+
+				<li class="nav-item">
+					<a href="https://web.gratisdns.dk" class="nav-link">GratisDNS.dk</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+
+
+
+
+
+ 
+
+  
+
+  
+  <!-- Menu moved to menubar --><div class="container" style="margin-top: 30px;">
+	<div class="card">
+		<div class="card-header">
+			<nav>
+				<ul class="nav nav-tabs nav-fill card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="?action=dns_primarydns">Primær DNS</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="?action=dns_secondarydns">Sekundær DNS</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="?action=dns_reversedns">Reverse DNS</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+<script>
+
+function delete_row_gdns(data){
+	if(!data.success)
+		return alert(data.error);
+	jQuery('#'+data.id).remove();
+}
+
+</script>
+ 
+
+
+
+	<div class="card-body">
+			<h4><small class="text-muted">DNS for:</small> mytest.dk 
+						<span class="badge badge-success float-right">Zone OK</span>
+															
+			</h4>
+			<hr />
+			
+						
+			
+
+						
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>SOA <small class="text-muted">(Start Of Auth)</small></h2>
+
+				</div>
+				<div class="table-responsive">
+					<div class="table-responsive">
+<p>SOA recorden indeholder mange tekniske detaljer, den mest interessante er serialnummeret. Serialnummeret er i formatet YYYYMMDDVV, hvor YYYY=år, MM=måned, DD=dag og VV=version.</p>
+					</div>
+					
+					<table class="table table-hover table-sm table-bordered table-striped">					
+						<thead>
+							<tr>
+								<th>Auth DNS</th>
+								<th>E-mail</th>
+								<th>Serial</th>
+								<th>Refresh</th>
+								<th>Retry</th>
+								<th>Expire</th>
+								<th>TTL</th>
+							</tr>
+						</thead>
+						<tbody>
+								
+						
+							<tr>
+								<td>ns1.gratisdns.dk</td>
+								<td>hostmaster@gratisdns.dk</td>
+								<td>2019031702</td>
+								<td>14400</td>
+								<td>3600</td>
+								<td>2419000</td>
+								<td>43200</td> 								
+							</tr>
+												</tbody>
+					</table>
+					<div class="d-flex flex-row">
+					
+					 
+					
+
+						<div class="ml-auto">
+														<a href="?action=hosting_netplads_create&package=netplads_small&domainname=mytest.dk" class="btn btn-sm btn-success">Opret webhosting (Netplads)</a>						
+																					<a href="?action=dns_primary_giveaway&user_domain=mytest.dk" class="btn btn-sm btn-secondary">Overdrag til anden brugernavn</a>
+							<a href="?action=dns_primary_record_update_soa&user_domain=mytest.dk" class="btn btn-sm btn-primary">Opdater serial</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>A <small class="text-muted">(Navn -> IP adresse)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+					<p>A records angiver IPv4 adresser.</p>
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>IPv4</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+
+							<tr> 
+								<td>*.mytest.dk</td>
+                                                                	<td>1.2.3.4</td>
+                                                                                                
+                                
+
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+										                                        													<a href="?action=dns_primary_record_edit_a&id=42&user_domain=mytest.dk" class="btn btn-secondary">Ændre</a>
+                                    		
+                                            
+										
+                                        													<a href="?action=dns_primary_delete_a&id=42&user_domain=mytest.dk" class="btn btn-danger">Slet</a>
+                                    		
+                                            
+									</div>
+								</td>
+							</tr>
+							
+							
+							
+
+							<tr> 
+								<td>mytest.dk</td>
+                                                                	<td>1.2.3.4</td>
+                                                                                                
+                                
+
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+										                                        													<a href="?action=dns_primary_record_edit_a&id=17&user_domain=mytest.dk" class="btn btn-secondary">Ændre</a>
+                                    		
+                                            
+										
+                                        													<a href="?action=dns_primary_delete_a&id=17&user_domain=mytest.dk" class="btn btn-danger">Slet</a>
+                                    		
+                                            
+									</div>
+								</td>
+							</tr>
+							
+							
+							
+
+							<tr> 
+								<td>localhost.mytest.dk</td>
+                                                                	<td>127.0.0.1</td>
+                                                                                                
+                                
+
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+										
+                                        													<a href="?action=dns_primary_delete_a&id=86&user_domain=mytest.dk" class="btn btn-danger">Slet</a>
+                                    		
+                                            
+									</div>
+								</td>
+							</tr>
+							
+							
+							
+						
+
+
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_urlforward&user_domain=mytest.dk" class="btn btn-sm btn-secondary">Tilføj URLforward record</a>								
+							<a href="?action=dns_primary_record_add_a&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj A record</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>AAAA <small class="text-muted">(Navn -> IPv6 adresse)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+					<p>AAAA records angiver IPv6 adresser.</p>
+				</div>			
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>IPv6</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>2001:db8:85a3:8d3:1319:8a2e:370:7348</td>
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																					<a href="?action=dns_primary_record_edit_aaaa&id=1337&user_domain=mytest.dk" class="btn btn-secondary">Ændre</a>
+										
+										<a href="?action=dns_primary_delete_aaaa&id=1337&user_domain=mytest.dk" class="btn btn-danger">Slet</a>
+									</div>
+								</td>
+							</tr>
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+					
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_aaaa&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj AAAA record</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>CNAME <small class="text-muted">(Alias -> A/AAAA adresse)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+					<p>CNAME angiver et alias for en A record.</p>
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Canonical name</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_cname&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj CNAME record</a>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>MX <small class="text-muted">(@Hostname -> A/AAAA adresse)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+					<p>MX records angiver hvilken A/AAAA record for domænet som er mail ansvarlig.</p>
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Exchanger</th>
+								<th>Preference</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>mytest.dk<br>
+																
+								
+								</td>
+								<td>10</td>
+								<td>43200</td>	
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																																												<a href="?action=dns_primary_record_edit_mx&id=666&user_domain=mytest.dk" class="btn btn-secondary">Ændre</a>
+																						
+
+										
+
+
+
+										
+																							<a href="?action=dns_primary_delete_mx&id=666&user_domain=mytest.dk" class="btn btn-danger">Slet</a>
+																																
+
+
+
+									</div>
+								</td>
+							</tr>
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+					
+						<div class="ml-auto">
+						
+							<a href="?action=dns_primary_record_add_mailforward&user_domain=mytest.dk" class="btn btn-sm btn-secondary">Tilføj Mailforward record</a>		
+							<a href="?action=dns_primary_record_add_mxbackupportforward&user_domain=mytest.dk" class="btn btn-sm btn-secondary">Tilføj MXBACKUP (portforward) record</a>																	
+							<a href="?action=dns_primary_record_add_mxbackup&user_domain=mytest.dk" class="btn btn-sm btn-secondary">Tilføj MXBACKUP record</a>						
+							<a href="?action=dns_primary_record_add_mx&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj MX record</a>
+						</div>
+
+						
+					</div>
+					
+					<div class="d-flex flex-row">
+						&nbsp;
+					</div>
+
+					<div class="d-flex flex-row">
+								
+						<div class="ml-auto">
+							<a href="https://ssl.gratisdns.dk/fornymf.phtml?d=mytest.dk" class="btn btn-sm btn-secondary">Forny (forwardsrs.net) MailForward</a>						
+							<a href="https://ssl.gratisdns.dk/fornymx.phtml?d=mytest.dk" class="btn btn-sm btn-secondary">Forny (mxbackup.gratisdns.dk) MXBackup</a>						
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>TXT <small class="text-muted">(Tekst felt)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Text</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>lumskebuks</td>
+								<td>43200</td>	
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																					<a href="?action=dns_primary_record_edit_txt&id=1992&user_domain=mytest.dk" class="btn btn-secondary">Ændre</a>
+										
+										<a href="?action=dns_primary_delete_txt&id=1992&user_domain=mytest.dk" class="btn btn-danger">Slet</a>
+									</div>
+								</td>
+							</tr>
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_txt&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj TXT record</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>SRV <small class="text-muted">(SeRVice)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Target</th>
+								<th>Priority</th>
+								<th>Weight</th>
+								<th>Port</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_srv&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj SRV record</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>CAA <small class="text-muted">(Certification Authority Authorization)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Flags</th>
+								<th>Tag</th>
+								<th>Value</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+					
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_caa&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj CAA record</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>TLSA <small class="text-muted">(TLSA)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Data</th>
+								<th>Usage</th>
+								<th>Selector</th>
+								<th>Matching</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+					
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_tlsa&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj TLSA record</a>
+						</div>
+					</div>	
+				</div>
+			</div>
+
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>DS <small class="text-muted">(DS)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Fingerprint</th>
+								<th>Preference</th>
+								<th>Weight</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">		
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_ds&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj DS record</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>SSHFP <small class="text-muted">(Secure SHell Finger Print)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Fingerprint</th>
+								<th>Algorithm</th>
+								<th>Type</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+	
+						</tbody>
+					</table>
+				<div class="d-flex flex-row">
+				
+					<div class="ml-auto">
+						<a href="?action=dns_primary_record_add_sshfp&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj SSHFP record</a>
+					</div>
+					</div>
+				</div>
+			</div>
+
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>AFSDB <small class="text-muted">(Andrew File System Data Base)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Exchanger</th>
+								<th>Preference</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+	
+						</tbody>
+					</table>
+				<div class="d-flex flex-row">
+					
+					<div class="ml-auto">
+						<a href="?action=dns_primary_record_add_afsdb&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj AFSDB record</a>
+					</div>
+					</div>
+				</div>
+			</div>
+
+
+			
+			<div class="dns-records">
+				<div class="d-flex flex-row">
+					<h2>NS <small class="text-muted">(Navneservers)</small></h2>
+
+				</div>
+				<div class="table-responsive table-responsive-lg">
+
+				</div>				
+				<div class="table-responsive table-responsive-lg">
+					<table class="table table-hover table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Hostname</th>
+								<th>Nameserver</th>
+								<th>TTL</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>ns1.gratisdns.dk</td>
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																			</div>
+								</td>
+							</tr>
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>ns2.gratisdns.dk</td>
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																			</div>
+								</td>
+							</tr>
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>ns3.gratisdns.dk</td>
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																			</div>
+								</td>
+							</tr>
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>ns4.gratisdns.dk</td>
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																			</div>
+								</td>
+							</tr>
+						
+							<tr>
+								<td>mytest.dk</td>
+								<td>ns5.gratisdns.dk</td>
+								<td>43200</td>
+								<td>
+									<div class="btn-group btn-group-sm float-right" role="group" aria-label="Ændre/slet record">
+																			</div>
+								</td>
+							</tr>
+	
+						</tbody>
+					</table>
+					<div class="d-flex flex-row">
+						<div class="ml-auto">
+							<a href="?action=dns_primary_record_add_ns&user_domain=mytest.dk" class="btn btn-sm btn-primary">Tilføj NS record</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		</div>
+	</div>
+
+		<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+
+		<!-- sweetalert2 below -->
+   	    	<script src="/js/sweetalert2.all.min.js"></script>
+			<link rel='stylesheet' href='/css/sweetalert2.min.css' type='text/css' media='all' />
+		
+
+
+
+	<script type='text/javascript' src='/scripts/fns.js'></script>
+
+    <link rel="stylesheet" href="/css/animate.min.css">
+
+  
+    <link rel='stylesheet' id='dns-css'  href='/css/dns.css' type='text/css' media='screen' />
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

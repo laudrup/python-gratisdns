@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" href="https://web.gratisdns.dk/wp-content/uploads/2015/05/favicon.png" type="image/x-icon" /> 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+	<script src="/js/promise.min.js"></script>
+
+
+    <link rel="stylesheet" href="/css/dns.css">
+
+	<link href="/css/fontawesome/all.css" rel="stylesheet">
+
+    <title>GratisDNS Admin</title>
+  </head>
+  <body>
+
+<!--      <input type="hidden" id="csrfp_hidden_data_token" value="csrfp_token"> -->
+<!-- 	  <input type="hidden" id="csrfp_hidden_data_urls" value='["*:\/\/*\/*"]'> -->
+<!--   	  <script type="text/javascript" src="/js/csrfprotector.js"></script>  -->
+
+      <script src="/js/jquery-3.3.1.min.js"></script>
+
+  
+  <!-- https://github.com/devWaleed/JQuery-JSON-Form-Binding/tree/master/src -->
+  <script src="/js/jquery-json-form-binding.min.js"></script>
+   
+  
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+	<div class="container">
+		<a class="navbar-brand" href="/"><img src="/images/websitelogo.svg" height="34"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbar-menu">
+			<ul class="navbar-nav ml-auto">
+
+				<li class="nav-item">
+					<a href="?action=dns_primarydns" class="nav-link">DNS</a>
+				</li>
+
+		
+				
+							
+				<li class="nav-item">
+					<a href="?action=hosting" class="nav-link">Hosting</a>
+				</li>
+
+	
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bruger</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="?action=usersetup_user">Indstillinger</a>
+						<a class="dropdown-item" href="?action=logmeout">Log ud</a>
+											</div>
+				</li>
+
+				<li class="nav-item">
+					<a href="https://web.gratisdns.dk" class="nav-link">GratisDNS.dk</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+
+
+
+
+
+ 
+
+  
+
+  
+  <!-- Menu moved to menubar --><div class="container" style="margin-top: 30px;">
+	<div class="card">
+		<div class="card-header">
+			<nav>
+				<ul class="nav nav-tabs nav-fill card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link" href="?action=dns_primarydns">Primær DNS</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="?action=dns_secondarydns">Sekundær DNS</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="?action=dns_reversedns">Reverse DNS</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+<div>&nbsp;</div>
+<div class="container">
+            <div class="col-sm-12" align="center">
+  
+  <div id="demo" class="carousel slide" data-ride="carousel">
+
+
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+
+	    <div class="carousel-item active peopleCarouselImg">
+      <a href="https://ssl.gratisdns.dk/order.phtml?domain=what-about.photography&amp;Tld=popular&amp;Tld2=dk&amp;action=search&amp;utf8=yes" target="_blank"><img src="https://web.gratisdns.dk/wp-content/uploads/2015/05/photography_danish.jpg"></a>
+    </div>
+		
+			
+	    <div class="carousel-item peopleCarouselImg">
+      <a href="https://web.gratisdns.dk/domaener/nationale/europa/dk/slettet-de-sidste-3-dage/" target="_blank"><img src="https://web.gratisdns.dk/wp-content/uploads/2018/02/dkslet.png"></a>
+    </div>
+			
+	    <div class="carousel-item peopleCarouselImg">
+      <a href="https://ssl.gratisdns.dk/order.phtml?domain=er-du-en-ener.one" target="_blank"><img src="https://web.gratisdns.dk/wp-content/uploads/2015/09/dotONE-banner-930x180.jpg"></a>
+    </div>
+			
+	    <div class="carousel-item peopleCarouselImg">
+      <a href="https://web.gratisdns.dk/hosting/webhotel/" target="_blank"><img src="https://web.gratisdns.dk/wp-content/uploads/2015/10/wordpress1.jpg"></a>
+    </div>
+			
+	    <div class="carousel-item peopleCarouselImg">
+      <a href="https://web.gratisdns.dk/domaener/dns/" target="_blank"><img src="https://web.gratisdns.dk/wp-content/uploads/2015/10/dnssec.png"></a>
+    </div>
+		
+  </div>
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+
+</div>
+
+</div>
+<div>&nbsp;</div> 
+<script src="/js/carousel.js"></script>
+
+<script>
+
+
+
+function confirmdelete( event, form ) {
+
+event.preventDefault();
+
+swal({
+  title: 'Er du sikker?',
+  text: "Du kan ikke genskabe dette uden at taste al data ind igen!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yep, slet det!',
+  cancelButtonText: 'Nej, vent!'
+  
+}).then(function() {
+               
+                        form.submit();
+               
+})
+
+
+}
+
+function searchForDomain() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("secondarydnslist");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("th")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+    
+    
+    
+  }
+}
+
+//$(document).ready(function() {
+//    $('#secondarydnslist').DataTable( {
+//        "paging":   false,
+//        "ordering": true,
+//        "info":     false,
+//        "searching":	false
+//    } );
+//} );
+
+
+$(document).ready(function() {
+  $(".search").keyup(function () {
+  var jobCount = $('.results tbody tr[style=""]').length;
+    $('.counter').text(jobCount + ' item');
+
+  if(jobCount == '0') {$('.no-result').show();}
+    else {$('.no-result').hide();}
+		  });
+});
+
+
+
+
+</script>
+
+ 
+			<div class="card-body">
+				<h1><small class="text-muted">Sekundær DNS</small><span class="badge float-right"></span></h1>
+				<hr />
+<p>Du kan her oprette sekundær DNS hvis du har en primær DNS server i forvejen.</p>
+<p>Du får 5 DNS hosts (langt over 50 maskiner) tilknyttet dit domæne når du opretter det under dette punkt.</p>
+<p>Husk at tilføje dem i din zonefil, de skal alle 5 optræde med vores navne:<br>ns1.gratisdns.dk, ns2.gratisdns.dk, ns3.gratisdns.dk, ns4.gratisdns.dk og ns5.gratisdns.dk.</p>
+<p>Du skal sende notify til axfr.gratisdns.dk (91.221.196.11), og tillade axfr til 91.221.196.0/28.</p>
+<p>Du skal tillade axfr fra 2001:67c:3c0:0010::11 og 2001:67c:3c0:0010::9 hvis du indtaster en ipv6 adresse (når det er muligt, ej aktivt endnu).</p>
+<p>Vi forbeholder os ret til ikke at yde support på opsætning af din primær navneserver.</p>
+				<div class="d-flex flex-row">
+					<h2>Sekundær <small class="text-muted">DNS</small></h2>
+					<div class="ml-auto">
+						<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-dns_secondary_select">Tilføj Sekundær Zone</button>
+					</div>
+				</div>
+				
+								
+				<div class="form-group pull-right">
+    				<input type="text" id="searchInput" class="search form-control" onkeyup="searchForDomain()" placeholder="Søg på domæne eller templatenavn her!">
+				<span class="counter pull-right"></span>
+				</div> 
+				
+				<div class="table-responsive table-responsive-lg">
+					<table id="secondarydnslist" class="table table-hover table-sm table-bordered table-striped results">
+						<thead>
+							<tr>
+								<th>Domæne</th>
+								<th>Master</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>								
+		</div>				
+</div>
+<div class="modal" id="modal-dns_secondary_select" role="dialog" tabindex="-1" aria-labelledby="modal-dns_secondary_select-label" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<form class="modal-content" action="index.php?action=dns_secondary_select" method="post">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-dns_secondary_select-label">Tilføj Sekundær DNS</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Luk">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+			<div class="container-fluid">
+			    <div class="row">
+					<div class="col-md-6"><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-dns_secondary_createsecondarydnsforthisdomain">Tilføj domæne</button></div>
+
+
+      				<div class="col-md-6 ml-auto" align><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-dns_secondary_createsecondarydnsforthistemplate">Tilføj template</button></div>
+
+			    </div>
+				</div>		
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuller</button>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal" id="modal-dns_secondary_createsecondarydnsforthistemplate" role="dialog" tabindex="-1" aria-labelledby="modal-dns_secondary_createsecondarydnsforthistemplate-label" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<form class="modal-content" action="index.php?action=dns_secondary_createsecondarydnsforthistemplate" method="post">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-dns_secondary_createsecondarydnsforthistemplate-label">Tilføj Sekundær DNS</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Luk">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="dns_secondary_createsecondarydnsforthistemplate-domain">Domæne</label>
+					<input type="text" class="form-control" id="dns_secondary_createsecondarydnsforthistemplate-domain" name="user_domain" placeholder="Template navn (der skal være et mellemrum i navnet)" value="" required />
+				</div>
+				<div class="form-group">
+					<label for="dns_secondary_createsecondarydnsforthistemplate-ip">IP</label>
+					<input type="text" class="form-control" id="dns_secondary_createsecondarydnsforthistemplate-ip" name="user_domain_ip" placeholder="127.0.0.1" value="" required />
+				</div>
+				<div class="form-group">
+					<label for="dns_secondary_createsecondarydnsforthistemplate-ip2">IP2</label>
+					<input type="text" class="form-control" id="dns_secondary_createsecondarydnsforthistemplate-ip2" name="user_domain_ip2" placeholder="127.0.0.2" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuller</button>
+				<button type="submit" class="btn btn-primary">Tilføj</button>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal" id="modal-dns_secondary_createsecondarydnsforthisdomain" role="dialog" tabindex="-1" aria-labelledby="modal-dns_secondary_createsecondarydnsforthisdomain-label" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<form class="modal-content" action="index.php?action=dns_secondary_createsecondarydnsforthisdomain" method="post">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-dns_secondary_createsecondarydnsforthisdomain-label">Tilføj Sekundær DNS</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Luk">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="dns_secondary_createsecondarydnsforthisdomain-domain">Domæne</label>
+					<input type="text" class="form-control" id="dns_secondary_createsecondarydnsforthisdomain-domain" name="user_domain" placeholder="domæne.dk" value="" required />
+				</div>
+				<div class="form-group">
+					<label for="dns_secondary_createsecondarydnsforthisdomain-ip">IP</label>
+					<input type="text" class="form-control" id="dns_secondary_createsecondarydnsforthisdomain-ip" name="user_domain_ip" placeholder="127.0.0.1" value="" required />
+				</div>
+				<div class="form-group">
+					<label for="dns_secondary_createsecondarydnsforthisdomain-ip2">IP2</label>
+					<input type="text" class="form-control" id="dns_secondary_createsecondarydnsforthisdomain-ip2" name="user_domain_ip2" placeholder="127.0.0.2" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuller</button>
+				<button type="submit" class="btn btn-primary">Tilføj</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+</div>
+
+
+<script>
+$('#modal-dns_secondary_createsecondarydnsforthisdomain').on('shown.bs.modal', function () {
+  $('#dns_secondary_createsecondarydnsforthisdomain-domain').focus()
+})
+</script>
+
+<script>
+$('#modal-dns_secondary_createsecondarydnsforthistemplate').on('shown.bs.modal', function () {
+  $('#dns_secondary_createsecondarydnsforthistemplate-domain').focus()
+})
+</script>
+
+		<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+
+		<!-- sweetalert2 below -->
+   	    	<script src="/js/sweetalert2.all.min.js"></script>
+			<link rel='stylesheet' href='/css/sweetalert2.min.css' type='text/css' media='all' />
+		
+
+
+
+	<script type='text/javascript' src='/scripts/fns.js'></script>
+
+    <link rel="stylesheet" href="/css/animate.min.css">
+
+  
+    <link rel='stylesheet' id='dns-css'  href='/css/dns.css' type='text/css' media='screen' />
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>
