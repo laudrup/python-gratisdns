@@ -5,6 +5,8 @@ beautifulsoup4
 bs4
 certifi
 chardet
+coverage
+coveralls
 cssselect
 fake-useragent
 idna
