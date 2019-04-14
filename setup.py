@@ -13,7 +13,7 @@ setup(
     author_email='mads@sulau.dk, laudrup@stacktrace.dk',
     url='https://github.com/laudrup/python-gratisdns',
     packages=[
-        'python-gratisdns',
+        'python_gratisdns',
     ],
     license='MIT',
     description='Unofficial library for interfacing with the gratisdns.dk web interface',
