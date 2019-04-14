@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='python-gratisdns',
-    version='0.2',
+    version='0.3',
     author='Mads Sülau Jørgensen, Kasper Laudrup',
     author_email='mads@sulau.dk, laudrup@stacktrace.dk',
     url='https://github.com/laudrup/python-gratisdns',
@@ -20,7 +20,7 @@ setup(
     long_description=readme(),
     long_description_content_type='text/markdown',
     install_requires=[
-        'requests',
+        'requests-html',
         'wheel',
     ],
     test_suite='nose.collector',
