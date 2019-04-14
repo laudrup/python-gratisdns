@@ -13,7 +13,7 @@ admin interface and python 3.
 Installation
 ============
 
-To be documented...
+`pip install python-gratisdns`
 
 Examples
 ========
