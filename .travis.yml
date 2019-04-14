@@ -4,6 +4,6 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - coverage run --source python_gratisdns setup.py test
+  - coverage run --source gratisdns setup.py test
 after_success:
   - coveralls
