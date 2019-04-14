@@ -1,6 +1,9 @@
 python-gratisdns
 ================
 
+[![Build Status](https://travis-ci.org/laudrup/python-gratisdns.png)](https://travis-ci.org/laudrup/python-gratisdns)
+[![Coverage Status](https://img.shields.io/coveralls/github/laudrup/python-gratisdns.svg)](https://coveralls.io/github/laudrup/python-gratisdns)
+
 A project which aims to combine the ease of python, with the power of GratisDNS.
 
 This is a rewrite of the original implementation from
